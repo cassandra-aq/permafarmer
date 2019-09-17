@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('email')->unique();
             $table->string('barcode')->unique();
+            $table->string('iban')->unique();
+            $table->string('bic')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedInteger('user_type_id')->unsigned();
             $table->foreign('user_type_id')->references('id')->on('user_types');
