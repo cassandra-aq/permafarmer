@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('carts', 'Repositories\CartController');
+
+Route::resource('products', 'Repositories\ProductController');
+
+Route::resource('seasons', 'Repositories\SeasonController');
+
+
