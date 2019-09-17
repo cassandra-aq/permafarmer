@@ -16,6 +16,7 @@ class CreateSubscriptionsTable extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('duration');
+            $table->dateTime('end_at');
             $table->float('weight');
             $table->float('price');
             $table->unsignedInteger('user_id');
