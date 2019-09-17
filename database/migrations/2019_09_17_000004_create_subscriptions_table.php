@@ -14,12 +14,12 @@ class CreateSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('duration');
             $table->dateTime('end_at');
             $table->float('weight');
             $table->float('price');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
