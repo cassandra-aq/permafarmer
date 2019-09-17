@@ -14,7 +14,7 @@ class CreateCartsTable extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('state');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

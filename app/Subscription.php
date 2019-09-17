@@ -15,7 +15,12 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'duration', 'weight', 'price'
+        'duration', 'weight', 'price', 'endAt'
     ];
+
+    public function comments()
+    {
+        return $this->belo('App\Comment');
+    }
 
 }

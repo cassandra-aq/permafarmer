@@ -18,4 +18,8 @@ class Season extends Model
         'name'
     ];
 
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
 }
