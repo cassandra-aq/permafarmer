@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeasonsTable extends Migration
+class CreateItemProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateSeasonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seasons', function (Blueprint $table) {
+        Schema::create('item_product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->float('quantity');
+            $table->unsignedInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedInteger('cart_id');
+            $table->foreign('cart_id')->references('id')->on('carts');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,6 +32,6 @@ class CreateSeasonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seasons');
+        Schema::dropIfExists('item_product');
     }
 }
