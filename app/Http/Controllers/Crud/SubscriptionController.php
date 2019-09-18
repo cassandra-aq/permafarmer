@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Crud;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Subscription;
+use App\User;
+use Carbon\Traits\Date;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class SubscriptionController extends Controller
 {
@@ -30,22 +34,26 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        return view('subscriptions.create');
+        $users = User::all();
+        return view('subscriptions.create', ['users' => $users]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         DB::transaction(function () use ($request) {
-            (new Subscription())->fill($request->all())->saveOrFail();
+            $subscription = new Subscription();
+            $subscription->end_at = now()->addMonths($request->get('duration'));
+            $subscription->user()->associate($request->get("user"));
+            $subscription->fill($request->all())->saveOrFail();
         });
 
-        return redirect('subscriptions.index')->with('success', 'L\'abonnement a bien été ajouté.');
+        return redirect()->route('subscriptions.index')->with('success', 'L\'abonnement a bien été ajouté.');
     }
 
     /**
@@ -63,7 +71,8 @@ class SubscriptionController extends Controller
      */
     public function edit(Subscription $subscription)
     {
-        return view('subscriptions.edit', compact('subscription'));
+        $users = User::all();
+        return view('subscriptions.edit', compact('subscription', 'users'));
     }
 
     /**
@@ -74,8 +83,10 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, Subscription $subscription)
     {
-        $subscription = $subscription->fill($request->all())->saveOrFail();
-        return redirect('subscriptions.index')->with('success', 'L\'abonnement a bien été mis à jour.');
+        DB::transaction(function () use ($request, $subscription) {
+            $subscription->fill($request->all())->saveOrFail();
+        });
+        return redirect()->route('subscriptions.index')->with('success', 'L\'abonnement a bien été mis à jour.');
     }
 
     /**
@@ -86,7 +97,7 @@ class SubscriptionController extends Controller
     public function destroy(Subscription $subscription)
     {
         $subscription->delete();
-        return redirect('subscriptions.index')->with('success', 'L\'abonnement a été supprimé.');
+        return redirect()->route('subscriptions.index')->with('success', 'L\'abonnement a été supprimé.');
     }
 
 }
