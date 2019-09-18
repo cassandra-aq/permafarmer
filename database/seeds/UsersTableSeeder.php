@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'firstname' => "DURAND",
-            'lastname' => "Pierre",
+            'lastname' => "DURAND",
+            'firstname' => "Pierre",
             'email' => "pierre.durand@fake.com",
             'barcode' => randomBarcode(8),
             'iban' => randomBarcode(10),
@@ -23,8 +23,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
         User::create([
-            'firstname' => "DOE",
-            'lastname' => "John",
+            'lastname' => "DOE",
+            'firstname' => "John",
             'email' => "john.doe@fake.com",
             'barcode' => randomBarcode(8),
             'iban' => randomBarcode(10),
@@ -33,8 +33,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
         User::create([
-            'firstname' => "MANBU",
-            'lastname' => "Gérard",
+            'lastname' => "MANBU",
+            'firstname' => "Gérard",
             'email' => "gérard.manbu@fake.com",
             'barcode' => randomBarcode(8),
             'iban' => randomBarcode(10),

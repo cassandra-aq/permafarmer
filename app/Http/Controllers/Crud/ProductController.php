@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Crud;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Error;
-use \Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 class ProductController extends Controller
