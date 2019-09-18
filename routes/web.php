@@ -22,3 +22,7 @@ Route::resource('products', 'Crud\ProductController');
 
 // USERS
 Route::resource('users', 'Crud\UserController');
+
+// USERTYPES
+Route::resource('user_types', 'Crud\UserTypeController');
+
