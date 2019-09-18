@@ -10,7 +10,7 @@
     <div class="col-lg-6 col-lg-offset-3">
         <h3>Editer Commande</h3>
         {!! Form::model($cart, [
-            'url' => route('cart.update', $cart),
+            'url' => route('carts.update', $cart),
             'method' => 'PUT'
         ]) !!}
         <div class="form-group">
