@@ -15,10 +15,8 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        $season = Season::all();
-        return  view('/seasons/index',
-            ['seasons' => $season]
-        );
+        $seasons = Season::all();
+        return  view('season.index', ['seasons' => $seasons]);
     }
 
     /**
@@ -28,7 +26,7 @@ class SeasonController extends Controller
      */
     public function create()
     {
-        return view('seasons/create');
+        return view('seasons.create');
     }
 
     /**
@@ -42,7 +40,7 @@ class SeasonController extends Controller
         DB::transaction(function () use($request){
             $season = (new Season)->fill($request->all())->saveOrFail();
 
-            return redirect('season.show',['season'=>$season])->with('success','Season has been added');
+            return redirect('seasons.show',['season'=>$season])->with('success','Season has been added');
         });
 
     }
@@ -55,8 +53,7 @@ class SeasonController extends Controller
      */
     public function show(Season $season)
     {
-        $season = Season::findorfail($season->id);
-        return view('seasons/show')->withSeason($season);
+        return view('seasons.show', compact('season'));
     }
 
     /**
@@ -67,7 +64,7 @@ class SeasonController extends Controller
      */
     public function edit(Season $season)
     {
-        return view('seasons/edit', compact('season'));
+        return view('seasons.edit', compact('season'));
     }
 
     /**
@@ -79,7 +76,11 @@ class SeasonController extends Controller
      */
     public function update(Request $request, Season $season)
     {
-        //
+        DB::transaction(function () use ($request, $season) {
+            $season = $season->fill($request->all())->saveOrFail();
+
+            return redirect('seasons.show', ['season' => $season ])->with('success', 'Season has been updated');
+        });
     }
 
     /**
@@ -90,6 +91,7 @@ class SeasonController extends Controller
      */
     public function destroy(Season $season)
     {
-        //
+        $season->delete();
+        return redirect('seasons.index')->with('success', 'Season has been deleted successfully');
     }
 }
