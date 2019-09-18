@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('welcome')
 @section('content')
     <style>
         .uper {
@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <a href="{{ route('create_mood') }}" class="btn btn-success">Ajouter une Saison</a>
+                    <a href="{{ route('seasons.create') }}" class="btn btn-success">Ajouter une Saison</a>
                 </div>
             </div>
             <div class="row">
@@ -38,7 +38,7 @@
                                 <td>{{$season->updated_at}}</td>
                                 <td><a href="{{ route('seasons.edit',$season)}}" class="btn btn-primary">Editer</a></td>
                                 <td>
-                                    <form action="{{ route('seasons.delete', $season)}}" onsubmit="return confirm('Etes vous sur ?')">
+                                    <form action="{{ route('seasons.destroy', $season)}}" onsubmit="return confirm('Etes vous sur ?')">
                                         <button class="btn btn-danger">Supprimer</button>
                                     </form>
                                 </td>

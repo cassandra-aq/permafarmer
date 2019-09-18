@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Repositories;
+namespace App\Http\Controllers\Crud;
 
 use App\Season;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class SeasonController extends Controller
 {
@@ -16,7 +17,7 @@ class SeasonController extends Controller
     public function index()
     {
         $seasons = Season::all();
-        return  view('season.index', ['seasons' => $seasons]);
+        return  view('seasons.index', ['seasons' => $seasons]);
     }
 
     /**
@@ -37,12 +38,11 @@ class SeasonController extends Controller
      */
     public function store(Request $request)
     {
+        $season=
         DB::transaction(function () use($request){
-            $season = (new Season)->fill($request->all())->saveOrFail();
-
-            return redirect('seasons.show',['season'=>$season])->with('success','Season has been added');
+            (new Season)->fill($request->all())->saveOrFail();
         });
-
+        return redirect()->route('seasons.index', ['season'=>$season])->with('success','La saison a bien été ajoutée.');
     }
 
     /**
@@ -51,10 +51,11 @@ class SeasonController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function show(Season $season)
-    {
-        return view('seasons.show', compact('season'));
-    }
+//    public function show()
+//    {
+//        $seasons = Season::all();
+//        return  view('seasons.index', ['seasons' => $seasons]);
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -78,9 +79,8 @@ class SeasonController extends Controller
     {
         DB::transaction(function () use ($request, $season) {
             $season = $season->fill($request->all())->saveOrFail();
-
-            return redirect('seasons.show', ['season' => $season ])->with('success', 'Season has been updated');
         });
+        return redirect()->route('seasons.index')->with('success','La saison a bien été modifiée.');
     }
 
     /**
@@ -91,7 +91,7 @@ class SeasonController extends Controller
      */
     public function destroy(Season $season)
     {
-        $season->delete();
-        return redirect('seasons.index')->with('success', 'Season has been deleted successfully');
+        $season->forcedelete();
+        return redirect()->route('seasons.index')->with('success', 'La saison a bien été supprimée.');
     }
 }
