@@ -24,7 +24,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::query()->paginate(10);
-        return view('user.index', ['users' => $users]);
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     /**
