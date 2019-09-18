@@ -30,7 +30,7 @@
                         @foreach($carts as $cart)
                             <tr>
                                 <td>{{$cart->id}}</td>
-                                <td>{{$cart->user_id}}</td>
+                                <td>{{$cart->name}}</td>
                                 <td>{{$cart->state}}</td>
                                 <td>{{$cart->created_at}}</td>
                                 <td>{{$cart->updated_at}}</td>

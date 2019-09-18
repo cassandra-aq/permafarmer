@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Crud;
 
 use App\Cart;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -17,6 +19,15 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::paginate(20);
+        $users = User::all();
+        foreach ($carts as $cart){
+            foreach ($users as $user)  {
+                if ($cart->user_id == $user->id) {
+                    $cart->name = $user->firstname;
+                    //dd($cart->name);
+                }
+            }
+        }
         return view('carts.index', ['carts' => $carts]);
     }
 
