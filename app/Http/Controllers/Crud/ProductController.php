@@ -10,6 +10,7 @@ use PhpParser\Error;
 use \Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+
 class ProductController extends Controller
 {
     /**
