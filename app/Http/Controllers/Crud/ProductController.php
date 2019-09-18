@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Crud;
 
 use App\Product;
 use Illuminate\Http\Request;
@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::paginate(20);
-        return view('/products/index',
-            ['products' => $product]
+        $products = Product::paginate(20);
+        return view('products.index',
+            ['products' => $products]
         );
     }
 
@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('/products/create');
+        return view('products.create');
     }
 
     /**
@@ -38,14 +38,8 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        Product::create([
-            'name' => $req->input('product_name'),
-            'price' => $req->input('product_price'),
-            'weight_stocked' => $req->input('product_weight_stocked'),
-            'unity_stocked' => $req->input('product_unity_stocked'),
-            'weight' => $req->input('weight'),
-        ]);
-        return redirect(route('index_product'));
+        $product = (new Product)->fill($req->all())->saveOrFail();
+        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été ajouté.');
     }
 
     /**
@@ -54,10 +48,9 @@ class ProductController extends Controller
      * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findorfail($id);
-        return view('products/show')->withProduct($product);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -66,12 +59,9 @@ class ProductController extends Controller
      * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::findorfail($id);
-        return view('products/edit',
-            compact('product')
-        );
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -83,16 +73,8 @@ class ProductController extends Controller
      */
     public function update(Request $req, Product $product)
     {
-        $req->validate([
-            'genre_type'=>'required'
-        ]);
-        $product->name = $req->input('product_name');
-        $product->price = $req->input('product_price');
-        $product->weight_stocked = $req->input('product_weight_stocked');
-        $product->unity_stocked = $req->input('product_unity_stocked');
-        $product->weight = $req->input('weight');
-        $product->save();
-        return redirect(route('index_product'))->with('success', 'Le produit a été modifié');
+        $product = $product->fill($req->all())->saveOrFail();
+        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été mis à jour.');
     }
 
     /**
@@ -101,10 +83,10 @@ class ProductController extends Controller
      * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::findorfail($id)->forceDelete();
-        return redirect(route('index_product'))->with('success', 'Le produit a été supprimé');
+        $product->delete();
+        return redirect('products.index')->with('success', 'Le produit a été supprimé.');
     }
 
 }
