@@ -14,12 +14,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        /* @var User $user_subject */
-        $user_subject = $this->user;
-        /* @var User $auth_user */
-        $auth_user = $this->user();
-
-        return $auth_user !== null && ($auth_user->isAdmin() || $auth_user->is($user_subject));
+        return true;
     }
 
     /**
@@ -32,8 +27,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email'
         ];
     }
 }

@@ -18,7 +18,8 @@ class Product extends Model {
         'price',
         'weight_stocked',
         'unity_stocked',
-        'weight'
+        'weight',
+        'image_name'
     ];
 
     public function itemProduct()

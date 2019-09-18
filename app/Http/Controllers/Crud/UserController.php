@@ -6,6 +6,7 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\UserType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('user_admin', ['only' => ['create', 'store', 'delete']]);
+//        $this->middleware('user_admin', ['only' => ['create', 'store', 'delete']]);
     }
     /**
      * Display a listing of the resource.
@@ -34,24 +35,30 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $userTypes = UserType::all();
+        return view('users.create', ['userTypes' => $userTypes]);
     }
 
     /**
      * @param UserStoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserStoreRequest $request)
     {
+
+        $userType = UserType::findOrFail($request->get('userType'));
+
         $request = $request->merge([
             'password' => Hash::make($request->get('password')),
-            'barcode' => randomBarcode()
+            'barcode' => randomBarcode(),
         ]);
 
-        DB::transaction(function () use ($request) {
-            $user = (new User)->fill($request->all())->saveOrFail();
-
-            return redirect('users.show', ['user' => $user])->with('success', 'User has been added');
+        DB::transaction(function () use ($request, $userType) {
+            $user = new User();
+            $user->userType()->associate($userType);
+            $user->fill($request->all())->saveOrFail();
         });
+        return redirect()->route('users.index')->with('success', 'User has been added');
     }
 
     /**
@@ -62,7 +69,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+//        return view('users.show', compact('user'));
     }
 
     /**
@@ -90,10 +97,9 @@ class UserController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $user) {
-            $user = $user->fill($request->all())->saveOrFail();
-
-            return redirect('users.show', ['user' => $user])->with('success', 'User has been updated');
+           $user->fill($request->all())->saveOrFail();
         });
+        return redirect()->route('users.index')->with('success', 'User has been updated');
     }
 
     /**
@@ -104,6 +110,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('users.index')->with('success', 'User has been deleted successfully');
+        return redirect()->route('users.index')->with('success', 'User has been deleted');
     }
 }

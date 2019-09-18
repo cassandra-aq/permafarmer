@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Crud;
 
+use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Error;
+use \Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class ProductController extends Controller
 {
@@ -39,19 +45,21 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        $product = (new Product)->fill($req->all())->saveOrFail();
-        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été ajouté.');
-    }
+        if($req->hasFile('image_file')){
+            $file =$req->file('image_file');
+            $name=time().$file->getClientOriginalName();
+            $file->move(public_path().'/images/products',$name);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Artist  $artist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return view('products.show', compact('product'));
+            $req = $req->merge([
+                'image_name' => $name
+            ]);
+        }
+
+        DB::transaction(function () use ($req) {
+            (new Product)->fill($req->all())->saveOrFail();
+        });
+
+        return redirect()->route('products.index')->with('success', 'Le produit a bien été ajouté.');
     }
 
     /**
@@ -74,8 +82,22 @@ class ProductController extends Controller
      */
     public function update(Request $req, Product $product)
     {
-        $product = $product->fill($req->all())->saveOrFail();
-        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été mis à jour.');
+
+
+        DB::transaction(function () use ($req, $product) {
+            $product->fill($req->all())->saveOrFail();
+        });
+
+        if($req->hasFile('image_name')){
+            $file =$req->file('image_name');
+            $name=time().$file->getClientOriginalName();
+            $filename  = public_path('/images/products/').$name;
+            if(File::exists($filename))
+                File::delete($filename);
+            $file->move(public_path().'/images/products/', $name);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Le produit a bien été modifié.');
     }
 
     /**
@@ -86,8 +108,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect('products.index')->with('success', 'Le produit a été supprimé.');
+        $product->forceDelete();
+        return redirect()->route('products.index')->with('success', 'Le produit a bien été supprimé.');
     }
 
 }

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('users.create') }}" class="btn btn-success">Ajouter un utilisateur</a>
+                <a href="{{ route('subscriptions.create') }}" class="btn btn-success">Ajouter un abonnement</a>
             </div>
         </div>
         <div class="row">
@@ -18,14 +18,15 @@
                         <th>Supprimer</th>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($subscriptions as $subscription)
                         <tr>
-                            <td>{{ $user->firstname }}</td>
-                            <td>{{ $user->lastname  }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td><a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Editer</a></td>
+                            <td>{{ $subscription->createdAt }}</td>
+                            <td>{{ $subscription->endAt}}</td>
+                            <td>{{ $subscription->weight }}</td>
+                            <td>{{ $subscription->duration }}</td>
+                            <td><a href="{{ route('subscriptions.edit', $subscription) }}" class="btn btn-primary">Editer</a></td>
                             <td>
-                                <form method="POST" action="{{ route('users.destroy', $user) }}" onsubmit="return confirm('Etes-vous sûr ?')">
+                                <form method="POST" action="{{ route('subscriptions.destroy', $subscription) }}" onsubmit="return confirm('Etes-vous sûr ?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger">Supprimer</button>
@@ -38,7 +39,7 @@
             </div>
         </div>
         <div class="text_center">
-            {{ $users->links() }}
+            {{ $subscriptions->links() }}
         </div>
 
     </div>

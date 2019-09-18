@@ -29,7 +29,7 @@ class UserTypeController extends Controller
      */
     public function create()
     {
-        return view('userTypes.create');
+        return view('user_types.create');
     }
 
     /**
@@ -42,10 +42,10 @@ class UserTypeController extends Controller
     {
 
         DB::transaction(function () use ($request) {
-            $userType = (new UserType)->fill($request->all())->saveOrFail();
-
-            return redirect('userTypes.show', ['userType' => $userType])->with('success', 'UserType has been added');
+            (new UserType)->fill($request->all())->saveOrFail();
         });
+        return redirect()->route('user_types.index')->with('success', 'UserType has been created');
+
     }
 
     /**
@@ -56,7 +56,7 @@ class UserTypeController extends Controller
      */
     public function show(UserType $userType)
     {
-        return view('userTypes.show', compact('userType'));
+//        return view('userTypes.show', compact('userType'));
     }
 
     /**
@@ -80,10 +80,9 @@ class UserTypeController extends Controller
     public function update(Request $request, UserType $userType)
     {
         DB::transaction(function () use ($request, $userType) {
-            $userType = $userType->fill($request->all())->saveOrFail();
-
-            return redirect('userTypes.show', ['userType' => $userType])->with('success', 'UserType has been updated');
+            $userType->fill($request->all())->saveOrFail();
         });
+        return redirect()->route('user_types.index')->with('success', 'UserType has been updated');
     }
 
     /**
@@ -94,6 +93,6 @@ class UserTypeController extends Controller
     public function destroy(UserType $userType)
     {
         $userType->delete();
-        return redirect('userTypes.index')->with('success', 'UserType has been deleted successfully');
+        return redirect()->route('user_types.index')->with('success', 'UserType has been successfully deleted');
     }
 }

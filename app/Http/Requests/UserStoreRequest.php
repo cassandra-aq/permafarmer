@@ -14,9 +14,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        /* @var User $user */
-        $user = auth()->user();
-        return $user !== null && $user->isAdmin();
+        return true;
     }
 
     /**
