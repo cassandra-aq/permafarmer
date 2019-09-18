@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Crud;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -38,8 +40,10 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        $product = (new Product)->fill($req->all())->saveOrFail();
-        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été ajouté.');
+        DB::transaction(function () use ($req) {
+            $product = (new Product)->fill($req->all())->saveOrFail();
+            return redirect()->route('products.index')->with('success', 'Le produit a bien été ajouté.');
+        });
     }
 
     /**
@@ -73,8 +77,10 @@ class ProductController extends Controller
      */
     public function update(Request $req, Product $product)
     {
-        $product = $product->fill($req->all())->saveOrFail();
-        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été mis à jour.');
+        DB::transaction(function () use ($req, $product) {
+            $product->fill($req->all())->saveOrFail();
+            return redirect()->route('products.index')->with('success', 'Le produit a bien été modifié.');
+        });
     }
 
     /**
@@ -86,7 +92,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('products.index')->with('success', 'Le produit a été supprimé.');
+        return redirect()->route('products.index')->with('success', 'Le produit a bien été supprimé.');
     }
 
 }
