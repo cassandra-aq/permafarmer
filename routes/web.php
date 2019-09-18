@@ -30,6 +30,3 @@ Route::resource('user_types', 'Crud\UserTypeController');
 // SUBSCRIPTIONS
 Route::resource('subscriptions', 'Crud\SubscriptionController');
 
-
-=======
->>>>>>> 3da1c641158a384bae5f64984cee8d37e64ffee3
