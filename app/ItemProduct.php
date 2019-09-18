@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class ItemProduct extends Model {
 
     protected $fillable = [
-        'quantity'
+        'quantity',
+        'product'
     ];
 
     public function carts()

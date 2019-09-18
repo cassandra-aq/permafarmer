@@ -11,13 +11,18 @@
 |
 */
 
-Route::get('/', 'WebController@index');
-
+//Route::get('/', 'WebController@index');
+// CARTS
 Route::resource('carts', 'Crud\CartController');
 
+// PRODUCTS
 Route::resource('products', 'Crud\ProductController');
 
+// SEASONS
 Route::resource('seasons', 'Crud\SeasonController');
+
+// ITEMPRODUCTS
+Route::resource('item_products', 'Crud\ItemProductController');
 
 // USERS
 Route::resource('users', 'Crud\UserController');

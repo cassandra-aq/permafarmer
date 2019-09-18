@@ -49,9 +49,12 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $cart =
-            DB::transaction(function () use($request){
-            (new Cart)->fill($request->all())->saveOrFail();
+        $userId = User::findOrFail($request->get('userId'));
+
+        DB::transaction(function () use($request, $userId) {
+           $cart = new Cart();
+           $cart->user_id()->associate($userId);
+           $cart->fill($request->all())->saveOrFail();
         });
         //return redirect('?',['cart'=>$cart])->with('success','La commande est validée');
 
@@ -104,6 +107,6 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         $cart->forcedelete();
-        return redirect()->route('?')->with('success', 'La commande a bien été supprimée.');
+        return redirect()->route('carts.index')->with('success', 'La commande a bien été supprimée.');
     }
 }
