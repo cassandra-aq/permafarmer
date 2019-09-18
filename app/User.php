@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'barCode'
+        'firstname', 'lastname', 'email', 'password', 'barCode', 'iban', 'bic'
     ];
 
     /**
@@ -37,10 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin(){
+        return $this->userType->isAdmin();
+    }
+
     public function userType()
     {
         return $this->belongsTo('App\UserType');
     }
-
-
 }

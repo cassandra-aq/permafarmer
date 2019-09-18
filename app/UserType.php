@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserType extends Model
 {
 
+    private  const
     /**
      * The attributes that are mass assignable.
      *
