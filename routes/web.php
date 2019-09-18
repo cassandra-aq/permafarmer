@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('carts', 'Crud\CartController');
 
-// PRODUCTS
 Route::resource('products', 'Crud\ProductController');
 
+Route::resource('seasons', 'Crud\SeasonController');
 
 // USERS
 Route::resource('users', 'Crud\UserController');
@@ -30,3 +31,5 @@ Route::resource('user_types', 'Crud\UserTypeController');
 Route::resource('subscriptions', 'Crud\SubscriptionController');
 
 
+=======
+>>>>>>> 3da1c641158a384bae5f64984cee8d37e64ffee3

@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->float('price');
-            $table->float('weightStocked');
-            $table->integer('unitStocked');
+            $table->float('weightStocked')->nullable();
+            $table->integer('unitStocked')->nullable();
             $table->float('weight');
             $table->rememberToken();
             $table->timestamps();
