@@ -23,3 +23,7 @@ Route::get('/produits/modifier/{id}', 'ProductController@edit')->name('edit_genr
 Route::post('/produits/store', 'ProductController@store')->name('store_genre');
 Route::put('/produits/update/{genre}', 'ProductController@update')->name('update_genre');
 Route::get('/produits/destroy/{id}', 'ProductController@destroy')->name('destroy_genre');
+
+
+// USERS
+Route::resource('users', 'Crud\UserController');
