@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ route('users.create') }}" class="btn btn-success">Ajouter un Utilisateur</a>
+                <a href="{{ route('users.create') }}" class="btn btn-success">Ajouter un utilisateur</a>
             </div>
         </div>
         <div class="row">

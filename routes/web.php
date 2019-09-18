@@ -26,3 +26,7 @@ Route::resource('users', 'Crud\UserController');
 // USERTYPES
 Route::resource('user_types', 'Crud\UserTypeController');
 
+// SUBSCRIPTIONS
+Route::resource('subscriptions', 'Crud\SubscriptionController');
+
+

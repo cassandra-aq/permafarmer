@@ -19,7 +19,7 @@ class UserTypeController extends Controller
     public function index()
     {
         $userTypes = UserType::all();
-        return view('user_types.index', ['userTypes' => $userTypes]);
+        return view('userTypes.index', ['userTypes' => $userTypes]);
     }
 
     /**
@@ -45,6 +45,7 @@ class UserTypeController extends Controller
             (new UserType)->fill($request->all())->saveOrFail();
         });
         return redirect()->route('user_types.index')->with('success', 'UserType has been created');
+
     }
 
     /**
@@ -55,7 +56,7 @@ class UserTypeController extends Controller
      */
     public function show(UserType $userType)
     {
-        //
+//        return view('userTypes.show', compact('userType'));
     }
 
     /**
@@ -66,7 +67,7 @@ class UserTypeController extends Controller
      */
     public function edit(UserType $userType)
     {
-        return view('user_types.edit', compact('userType'));
+        return view('userTypes.edit', compact('userType'));
     }
 
     /**
@@ -78,7 +79,6 @@ class UserTypeController extends Controller
      */
     public function update(Request $request, UserType $userType)
     {
-
         DB::transaction(function () use ($request, $userType) {
             $userType->fill($request->all())->saveOrFail();
         });

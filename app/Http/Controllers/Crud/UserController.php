@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+//        return view('users.show', compact('user'));
     }
 
     /**
@@ -99,7 +99,7 @@ class UserController extends Controller
         DB::transaction(function () use ($request, $user) {
            $user->fill($request->all())->saveOrFail();
         });
-        return redirect('users.index')->with('success', 'User has been updated');
+        return redirect()->route('users.index')->with('success', 'User has been updated');
     }
 
     /**

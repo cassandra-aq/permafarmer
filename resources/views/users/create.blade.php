@@ -22,15 +22,15 @@
             <form method="post" action="{{ route('users.store') }}">
                 <div class="form-group">
                     @csrf
-                    <label for="type">Nom:</label>
-                    <input type="text" class="form-control" name="lastname"/>
-                    <label for="type">Prénom:</label>
-                    <input type="text" class="form-control" name="firstname"/>
-                    <label for="type">Email:</label>
-                    <input type="text" class="form-control" name="email"/>
-                    <label for="type">Password:</label>
-                    <input type="text" class="form-control" name="password"/>
-                    <label for="userType">Type d'utilisateur:</label>
+                    <label for="lastname">Nom:</label>
+                    <input id="lastname" type="text" class="form-control" name="lastname"/>
+                    <label for="firstname">Prénom:</label>
+                    <input id="firstname" type="text" class="form-control" name="firstname"/>
+                    <label for="email">Email:</label>
+                    <input id="email" type="email" class="form-control" name="email"/>
+                    <label for="password">Mot de passe:</label>
+                    <input id="password" type="password" class="form-control" name="password"/>
+                    <label for="userType">Type d'utilisateur</label>
                     <select id="userType" class="form-control" name="userType">
                         @foreach($userTypes as $userType)
                             <option value="{{$userType->id}}">{{$userType->name}}</option>
