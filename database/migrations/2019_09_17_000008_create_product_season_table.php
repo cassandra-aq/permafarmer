@@ -15,7 +15,6 @@ class CreateProductSeasonTable extends Migration
     {
         Schema::create('product_season', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('quantity');
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedInteger('season_id');

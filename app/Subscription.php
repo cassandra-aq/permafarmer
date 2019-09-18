@@ -6,8 +6,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Subscription extends Model
 {
 
@@ -17,7 +15,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'duration', 'weight', 'price', 'endAt'
+        'duration', 'weight', 'endAt'
     ];
 
     public function user()

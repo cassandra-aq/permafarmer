@@ -16,10 +16,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::paginate(20);
-        return view('/carts/index',
-            ['carts' => $cart]
-        );
+        $carts = Cart::paginate(20);
+        return view('carts.index', ['carts' => $carts]);
     }
 
     /**
@@ -29,7 +27,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        return view('carts/create');
+        return view('carts.create');
     }
 
     /**
@@ -40,11 +38,11 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        DB::transaction(function () use($request){
-            $cart = (new Cart)->fill($request->all())->saveOrFail();
-
-            return redirect('cart.show',['cart'=>$cart])->with('success','Cart has been added');
+        $cart =
+            DB::transaction(function () use($request){
+            (new Cart)->fill($request->all())->saveOrFail();
         });
+        //return redirect('?',['cart'=>$cart])->with('success','La commande est validée');
 
     }
 
@@ -54,11 +52,11 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
-    {
-        $cart = Cart::findorfail($cart->id);
-        return view('carts/show')->withCart($cart);
-    }
+//    public function show(Cart $cart)
+//    {
+//        $cart = Cart::findorfail($cart->id);
+//        return view('carts/show')->withCart($cart);
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +66,7 @@ class CartController extends Controller
      */
     public function edit(Cart $cart)
     {
-        return view('carts/edit', compact('cart'));
+        return view('carts.edit', compact('cart'));
     }
 
     /**
@@ -80,7 +78,10 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        DB::transaction(function () use ($request, $cart) {
+            $cart = $cart->fill($request->all())->saveOrFail();
+        });
+        return redirect()->route('carts.index')->with('success','La commande a bien été modifiée.');
     }
 
     /**
@@ -91,7 +92,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        Cart::findorfail($cart->id)->forceDelete();
-        return redirect(view('/carts/index'));
+        $cart->forcedelete();
+        return redirect()->route('?')->with('success', 'La commande a bien été supprimée.');
     }
 }
