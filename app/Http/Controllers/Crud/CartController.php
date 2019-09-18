@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Repositories;
+namespace App\Http\Controllers\Crud;
 
 use App\Cart;
 use Illuminate\Http\Request;
@@ -40,13 +40,12 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $cart = new \App\Cart();
-        $cart->state=$request->get('state');
-        $user=Auth::user();
-        if($user) {
-            $cart->users()->associate($user);
-        }
-        $cart->save();
+        DB::transaction(function () use($request){
+            $cart = (new Cart)->fill($request->all())->saveOrFail();
+
+            return redirect('cart.show',['cart'=>$cart])->with('success','Cart has been added');
+        });
+
     }
 
     /**

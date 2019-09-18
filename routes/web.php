@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('carts', 'Repositories\CartController');
+Route::resource('carts', 'Crud\CartController');
 
-Route::resource('products', 'Repositories\ProductController');
+Route::resource('products', 'Crud\ProductController');
 
-Route::resource('seasons', 'Repositories\SeasonController');
+Route::resource('seasons', 'Crud\SeasonController');
 
 

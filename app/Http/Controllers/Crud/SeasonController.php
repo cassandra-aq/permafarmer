@@ -39,10 +39,12 @@ class SeasonController extends Controller
      */
     public function store(Request $request)
     {
-        $season = new \App\Season();
-        $season->name=$request->get('name');
+        DB::transaction(function () use($request){
+            $season = (new Season)->fill($request->all())->saveOrFail();
 
-        $season->save();
+            return redirect('season.show',['season'=>$season])->with('success','Season has been added');
+        });
+
     }
 
     /**

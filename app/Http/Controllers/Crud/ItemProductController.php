@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Repositories;
+namespace App\Http\Controllers\Crud;
 
 use App\ItemProduct;
 use Illuminate\Http\Request;
