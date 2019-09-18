@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Crud;
 
 use App\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -15,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::paginate(20);
-        return view('/products/index',
-            ['products' => $product]
+        $products = Product::paginate(20);
+        return view('products.index',
+            ['products' => $products]
         );
     }
 
@@ -28,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products/create');
+        return view('products.create');
     }
 
     /**
@@ -37,61 +36,57 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        $product = new \App\Product();
-        $product->name=$request->get('name');
-        $product->price=$request->get('price');
-        $product->weight_stocked=$request->get('weightStocked');
-        $product->unity_stocked=$request->get('unityStocked');
-        $product->weight=$request->get('weight');
-
-        $product->save();
-
+        $product = (new Product)->fill($req->all())->saveOrFail();
+        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été ajouté.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $req, Product $product)
     {
-        //
+        $product = $product->fill($req->all())->saveOrFail();
+        return redirect('products.show', ['product' => $product])->with('success', 'Le produit a bien été mis à jour.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect('products.index')->with('success', 'Le produit a été supprimé.');
     }
+
 }
