@@ -1,27 +1,38 @@
 @extends('welcome')
 @section('content')
-    <div id="home-admin" class="container">
-        <h1>Créer un produit</h1>
-        <div class="row mt-5 d-flex justify-content-around">
-            <a href="">
-                <div class="card h-100">
-                    <h2>Utilisateurs</h2>
-                </div>
-            </a>
-            <a href="">
-                <div class="card h-100">
-                    <h2>Artistes</h2>
-                </div>
-            </a>
-            <div class="card h-100">
-                <h2>Paramètres des artistes</h2>
-                <ul class="list-group list-group-flush">
-                    <a href=""><li class="list-group-item">Pays</li></a>
-                    <a href=""><li class="list-group-item">Genres</li></a>
-                    <a href=""><li class="list-group-item">Années</li></a>
-                    <a href=""><li class="list-group-item">Emotions</li></a>
-                </ul>
-            </div>
+    <h3 class="jumbotron text-center">Créer un nouveau produit</h3>
+    <div class="col-lg-6 col-lg-offset-3">
+        {!! Form::open([
+            'url' => route('products.store'),
+            'method' => 'POST',
+            'enctype' => 'multipart/form-data',
+            'file' => true
+        ]) !!}
+        <div class="form-group">
+            <label for="name">Nom du produit</label>
+            {{ Form::text('name', null, ['class' => 'form-control']) }}
         </div>
+        <div class="form-group">
+            <label for="image_file">Image</label>
+            {{ Form::file('image_file', null, ['class' => 'form-control-file']) }}
+        </div>
+        <div class="form-group">
+            <label for="name">Prix</label>
+            {{ Form::number('price', '0.00', ['step' => '0.01', 'class' => 'form-control']) }}
+        </div>
+        <div class="form-group">
+            <label for="name">Poids en stock</label>
+            {{ Form::number('weight_stocked', null, ['class' => 'form-control']) }}
+        </div>
+        <div class="form-group">
+            <label for="name">Unité en stock</label>
+            {{ Form::number('unity_stocked', null, ['class' => 'form-control']) }}
+        </div>
+        <div class="form-group">
+            <label for="name">Poids à l'unité</label>
+            {{ Form::number('weight', null, ['class' => 'form-control']) }}
+        </div>
+        {{ Form::submit('Sauvegarder', ['class' => 'btn btn-primary']) }}
     </div>
+    {!! Form::close() !!}
 @endsection

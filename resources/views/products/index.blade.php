@@ -11,7 +11,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Voir le produit</th>
+                        <th>Image</th>
                         <th>Nom</th>
                         <th>prix</th>
                         <th>poids en stock</th>
@@ -23,7 +23,9 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr>
-                            <td><a href="{{ route('products.show', $product) }}" class="btn btn-primary">Voir le produit</a></td>
+                            <td width="70">
+                                <img class="card-img-top" width="70" src="{{url($product->image_name? 'images/products/'.$product->image_name:'images/No_image.png')}}" alt="{{$product->name}}"/>
+                            </td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->price  }}</td>
                             <td>{{ $product->weight_stocked }}</td>
@@ -31,7 +33,9 @@
                             <td>{{ $product->weight }}</td>
                             <td><a href="{{ route('products.edit', $product) }}" class="btn btn-primary">Editer</a></td>
                             <td>
-                                <form action="{{ route('products.destroy', $product) }}" onsubmit="return confirm('Etes vous sur ?')">
+                                <form method="POST" action="{{ route('products.destroy', $product) }}" onsubmit="return confirm('Etes vous sur ?')">
+                                    @csrf
+                                    @method('DELETE')
                                     <button class="btn btn-danger">Supprimer</button>
                                 </form>
                             </td>
@@ -42,9 +46,8 @@
             </div>
         </div>
         <div class="text_center">
-            {{$products->links()}}
+            {{ $products->links() }}
         </div>
 
     </div>
-
 @endsection
