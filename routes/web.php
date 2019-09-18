@@ -17,12 +17,7 @@ Route::get('/', function () {
 
 
 // PRODUCTS
-Route::get('/produits/index', 'ProductController@index')->name('index_genre');
-Route::get('/produits/ajouter', 'ProductController@create')->name('create_genre');
-Route::get('/produits/modifier/{id}', 'ProductController@edit')->name('edit_genre');
-Route::post('/produits/store', 'ProductController@store')->name('store_genre');
-Route::put('/produits/update/{genre}', 'ProductController@update')->name('update_genre');
-Route::get('/produits/destroy/{id}', 'ProductController@destroy')->name('destroy_genre');
+Route::resource('products', 'Crud\ProductController');
 
 
 // USERS
