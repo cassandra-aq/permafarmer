@@ -42,5 +42,15 @@ class UsersTableSeeder extends Seeder
             'user_type_id' => rand(1,2),
             'password' => bcrypt('password')
         ]);
+        User::create([
+            'lastname' => "Big",
+            'firstname' => "Boss",
+            'email' => "big.boss@fake.com",
+            'barcode' => randomBarcode(8),
+            'iban' => randomBarcode(10),
+            'bic' => randomBarcode(4),
+            'user_type_id' => 3,
+            'password' => bcrypt('password')
+        ]);
     }
 }

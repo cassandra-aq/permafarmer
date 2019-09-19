@@ -18,5 +18,8 @@ class UserTypesTableSeeder extends Seeder
         DB::table('user_types')->insert([
             'name' => "restaurateur"
         ]);
+        DB::table('user_types')->insert([
+            'name' => "admin"
+        ]);
     }
 }
