@@ -3,6 +3,10 @@
   -moz-box-shadow:    2px 2px 4px 0px rgba(50, 50, 50, 0.25);
   box-shadow:         2px 2px 4px 0px rgba(50, 50, 50, 0.25);
 
+  .card-title {
+    font-size: 1.5rem;
+  }
+
   .card-body {
     padding: 0;
   }
@@ -12,19 +16,13 @@
   }
 
   .nb-products, .btn-remove-product, .btn-add-product {
-    border-radius: 50%;
+    @include round-button;
     width: 40px;
     height: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
     position: absolute;
     bottom: -20px;
     z-index: 100;
-    -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.35);
-    -moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.35);
-    box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.35);
   }
 
   .nb-products {

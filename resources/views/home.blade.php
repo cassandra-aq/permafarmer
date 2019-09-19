@@ -22,7 +22,7 @@
                                 <li class="list-group-item py-4">
                                     <span class="card-title">{{ $product->name }}</span>
                                     <a href="#" class="btn-add-product" data-target="add-product" data-product="{{ $product->id }}">+</a>
-                                    <span class="nb-products"></span>
+                                    <span class="nb-products">0</span>
                                     <a href="#" class="btn-remove-product" data-target="delete-product" data-product="{{ $product->id }}">-</a>
                                 </li>
                                 <li class="list-group-item py-4 product-infos">
