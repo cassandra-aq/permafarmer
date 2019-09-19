@@ -14,6 +14,7 @@
                         <th>Image</th>
                         <th>Nom</th>
                         <th>prix</th>
+                        <th>Saisons</th>
                         <th>poids en stock</th>
                         <th>unité en stock</th>
                         <th>poids à l'unité</th>
@@ -28,6 +29,11 @@
                             </td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->price  }}</td>
+                            <td>
+                                @foreach($product->seasons as $season)
+                                    <span class="btn btn-secondary disabled">{{ $season->name }}</span>
+                                @endforeach
+                            </td>
                             <td>{{ $product->weight_stocked }}</td>
                             <td>{{ $product->unity_stocked }}</td>
                             <td>{{ $product->weight }}</td>

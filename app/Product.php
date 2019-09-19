@@ -29,6 +29,6 @@ class Product extends Model {
 
     public function seasons()
     {
-        return $this->belongsToMany('App/Season');
+        return $this->belongsToMany('App\Season');
     }
 }
