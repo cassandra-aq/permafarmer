@@ -6,7 +6,7 @@ require('popper.js');
 
 require('select2');
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('.select2-multiple').select2();
     $('.select2-simple').select2();
 });
