@@ -42,6 +42,8 @@ Route::get('/', 'Web\HomeController@index')->name('home');
 
 //LOGIN
 Route::get('/login', 'Auth\LoginController@open');
+Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
+Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');
 
 Route::get('/register', 'Auth\RegisterController@open');
 
