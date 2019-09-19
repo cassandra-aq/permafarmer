@@ -24,7 +24,7 @@
 <header class="navbar navbar-expand-md bg-light navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/users') }}">
-            <img src="" alt="Perma Farmer" width="55" height="55">
+            <i class="fab fa-pagelines" style="font-size: 400%">PermaFarmer</i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,16 +49,31 @@
                     <a class="nav-link">Qui sommes-nous?</a>
                 </li>
                 <li class="nav-item">
-                    <i class="material-icons">
-                        account_circle
-                    </i>
+                    <i class="fas fa-user-circle" data-toggle="modal" data-target="#modalLogin"></i>
                 </li>
                 <li class="nav-item">
-                    <i class="material-icons">
-                        shopping_cart
-                    </i>
+                    <i class="fas fa-shopping-cart"></i>
                 </li>
             </ul>
+        </div>
+        <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLoginLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Veuillez vous Authentifiez : </p>
+                        <div class="container" id="login-container">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </header>
