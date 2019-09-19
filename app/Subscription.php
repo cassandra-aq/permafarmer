@@ -15,7 +15,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'duration', 'weight', 'endAt'
+        'duration', 'weight', 'end_at'
     ];
 
     public function user()
