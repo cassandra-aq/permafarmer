@@ -38,11 +38,9 @@
                                 <td>{{$season->updated_at}}</td>
                                 <td><a href="{{ route('seasons.edit',$season)}}" class="btn btn-primary">Editer</a></td>
                                 <td>
-                                    {{--<form method="POST" action="{{ route('seasons.destroy', $season) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer?')">--}}
-                                        {{--@csrf--}}
-                                        {{--@method('DELETE')--}}
-                                        <button class="btn btn-danger" id ="openModal" >Supprimer</button>
-                                    {{--</form>--}}
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">
+                                        Supprimer
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -63,11 +61,16 @@
                             <p>Etes-vous sûr de vouloir supprimer ?.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Confirmer</button>
+                            <form method="POST" action="{{ route('seasons.destroy', $season) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-primary">Confirmer</button>
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
