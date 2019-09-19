@@ -33,3 +33,6 @@ Route::resource('user_types', 'Crud\UserTypeController');
 // SUBSCRIPTIONS
 Route::resource('subscriptions', 'Crud\SubscriptionController');
 
+//HOME
+Route::get('/', 'Web\HomeController@index')->name('home');
+
