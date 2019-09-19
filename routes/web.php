@@ -40,3 +40,5 @@ Route::resource('subscriptions', 'Crud\SubscriptionController');
 //HOME
 Route::get('/', 'Web\HomeController@index')->name('home');
 
+Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
+Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');

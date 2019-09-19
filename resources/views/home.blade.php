@@ -19,11 +19,11 @@
                         </figure>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item py-4">
+                                <li class="list-group-item pt-2 pb-4">
                                     <span class="card-title">{{ $product->name }}</span>
-                                    <a href="#" class="btn-add-product" data-target="add-product" data-product="{{ $product->id }}">+</a>
+                                    <a href="#" class="btn-add-product" data-api-url="{{ env('APP_URL') }}/api/add-cart/{{ $product->id }}">+</a>
                                     <span class="nb-products">0</span>
-                                    <a href="#" class="btn-remove-product" data-target="delete-product" data-product="{{ $product->id }}">-</a>
+                                    <a href="#" class="btn-remove-product" data-api-url="{{ env('APP_URL') }}/api/remove-cart/{{ $product->id }}">-</a>
                                 </li>
                                 <li class="list-group-item py-4 product-infos">
                                     <span>
