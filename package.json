@@ -19,5 +19,10 @@
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "jquery": "^3.4.1",
+        "popper.js": "^1.15.0",
+        "select2": "^4.0.10"
     }
 }
