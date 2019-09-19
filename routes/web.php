@@ -40,3 +40,8 @@ Route::resource('subscriptions', 'Crud\SubscriptionController');
 //HOME
 Route::get('/', 'Web\HomeController@index')->name('home');
 
+//LOGIN
+Route::get('/login', 'Auth\LoginController@open');
+
+Route::get('/register', 'Auth\RegisterController@open');
+
