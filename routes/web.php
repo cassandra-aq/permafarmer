@@ -11,7 +11,11 @@
 |
 */
 
-//Route::get('/', 'WebController@index');
+// WEB
+Route::get('/', 'WebController@index');
+//Route::get('/my_account', 'MyAccountController@showMyAccount')->middleware('auth');
+Route::get('/my_account/{user}', 'MyAccountController@showMyAccount');
+
 // CARTS
 Route::resource('carts', 'Crud\CartController');
 

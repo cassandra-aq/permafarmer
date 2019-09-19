@@ -2,6 +2,7 @@
 
 use App\UserType;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserTypesTableSeeder extends Seeder
 {
