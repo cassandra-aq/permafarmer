@@ -21,31 +21,49 @@
     @yield('style')
 </head>
 <body>
-<div id="app">
-    <nav class="navbar navbar-expand-md bg-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="" alt="Perma Farmer" width="55" height="55">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<header class="navbar navbar-expand-md bg-light navbar-laravel">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('/users') }}">
+            <img src="" alt="Perma Farmer" width="55" height="55">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto">
 
-                </ul>
+            </ul>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                </ul>
-            </div>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link">Nos produits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Le principe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Qui sommes-nous?</a>
+                </li>
+                <li class="nav-item">
+                    <i class="material-icons">
+                        account_circle
+                    </i>
+                </li>
+                <li class="nav-item">
+                    <i class="material-icons">
+                        shopping_cart
+                    </i>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</header>
+<div id="app">
+
 
     <main class="py-4">
         @if ($errors->any())
