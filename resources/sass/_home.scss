@@ -1,0 +1,57 @@
+.product-card {
+  -webkit-box-shadow: 2px 2px 4px 0px rgba(50, 50, 50, 0.25);
+  -moz-box-shadow:    2px 2px 4px 0px rgba(50, 50, 50, 0.25);
+  box-shadow:         2px 2px 4px 0px rgba(50, 50, 50, 0.25);
+
+  .card-body {
+    padding: 0;
+  }
+
+  .list-group-item {
+   position: relative;
+  }
+
+  .nb-products, .btn-remove-product, .btn-add-product {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: absolute;
+    bottom: -20px;
+    z-index: 100;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.35);
+    -moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.35);
+    box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.35);
+  }
+
+  .nb-products {
+    background-color: $yellow;
+    left: calc(50% - 20px)
+  }
+
+  .btn-add-product, .btn-remove-product {
+    background-color: $medium-green;
+    color: white;
+    transition: .3s;
+
+    &:hover {
+      background-color: $dark-green;
+    }
+  }
+
+  .btn-add-product {
+    left: -20px;
+  }
+
+  .btn-remove-product {
+    right: -20px;
+  }
+
+  .product-infos {
+    text-align: center;
+
+  }
+}
