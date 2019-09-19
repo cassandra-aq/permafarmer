@@ -2,6 +2,7 @@
 
 use App\Season;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Created by PhpStorm.
