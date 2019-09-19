@@ -1,11 +1,11 @@
 @extends('welcome')
-@section('style')
+@push('style')
     <style>
         .uper {
             margin-top: 40px;
         }
     </style>
-@endsection
+@endpush
 
 @section('content')
     <div class="card uper">

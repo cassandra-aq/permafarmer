@@ -18,7 +18,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    @yield('style')
+    @stack('style')
 </head>
 <body>
 <header class="navbar navbar-expand-md bg-light navbar-laravel">
@@ -85,6 +85,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-@yield('scripts')
+<script src="https://kit.fontawesome.com/4063fa2f4b.js" crossorigin="anonymous"></script>
+@stack('scripts')
 </body>
 </html>

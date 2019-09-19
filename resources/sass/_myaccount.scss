@@ -1,0 +1,34 @@
+.bag_quantity {
+  @include round-button;
+  height: 40px;
+  width: 40px;
+  background-color: $yellow;
+}
+
+.subtitle {
+  padding-left: 20px;
+  &:after {
+    background-color: $light-green;
+    bottom: -7px;
+  }
+}
+
+.big_basket {
+  background-color: $dark-green;
+  color: #fff;
+
+}
+
+.small_basket {
+  background-color: $light-green;
+  color: #fff;
+}
+
+.button {
+  @include round-button;
+}
+
+.bag_price {
+  border : none;
+  width: fit-content;
+}
