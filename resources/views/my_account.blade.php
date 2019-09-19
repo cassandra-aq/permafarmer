@@ -8,8 +8,11 @@
     <h2 class="subtitle">Mes abonnements</h2>
     <div class="card uper">
         <div class="card-body row">
-            <div class="col-2">{{ asset('img/groceries.png') }}</div>
-            <div class="col"></div>
+            <div class="col-2"><img src="{{ asset('img/groceries.png') }}"/></div>
+            <div class="col d-flex">
+                <div class="col-12"></div>
+                <div class="col-12"></div>
+            </div>
             <div class="col-3"></div>
 
 
