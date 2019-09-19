@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\File\File;
@@ -31,7 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $seasons = Season::all();
+        return view('products.create', [
+            'seasons' => $seasons,
+        ]);
     }
 
     /**
@@ -52,8 +56,15 @@ class ProductController extends Controller
             ]);
         }
 
+
         DB::transaction(function () use ($req) {
-            (new Product)->fill($req->all())->saveOrFail();
+            $product = new Product();
+            $seasons = Season::findOrFail($req->get('season'));
+            if ($seasons) {
+                foreach ($seasons as $season)
+                    $product->seasons()->attach($season);
+            };
+            $product->fill($req->all())->saveOrFail();
         });
 
         return redirect()->route('products.index')->with('success', 'Le produit a bien été ajouté.');
@@ -67,7 +78,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $seasons = Season::all();
+        return view('products.edit', compact(['product', 'seasons' => $seasons]));
     }
 
     /**
@@ -82,6 +94,11 @@ class ProductController extends Controller
 
 
         DB::transaction(function () use ($req, $product) {
+            $seasons = Season::findOrFail($req->get('season'));
+            if ($seasons) {
+                foreach ($seasons as $season)
+                    $product->seasons()->sync($season);
+            };
             $product->fill($req->all())->saveOrFail();
         });
 

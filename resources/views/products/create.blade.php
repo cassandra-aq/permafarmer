@@ -17,6 +17,14 @@
             {{ Form::file('image_file', null, ['class' => 'form-control-file']) }}
         </div>
         <div class="form-group">
+            <label for="seasons">Saisons</label>
+            <select class="select2-multiple" multiple name="seasons[]" class="form-control" id="seasons" style="width:100%">
+                @foreach($seasons as $season)
+                    <option value="{{ $season->id }}">{{ $season->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="name">Prix</label>
             {{ Form::number('price', '0.00', ['step' => '0.01', 'class' => 'form-control']) }}
         </div>
