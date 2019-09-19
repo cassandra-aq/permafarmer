@@ -1,6 +1,9 @@
-require('./bootstrap');
+//window.$ = window.jQuery = require('jquery');
 
-window.$ = window.jQuery = require('jquery');
+require('./bootstrap');
+require('bootstrap');
+require('popper.js');
+require('./modal');
 
 require('select2');
 

@@ -38,16 +38,35 @@
                                 <td>{{$season->updated_at}}</td>
                                 <td><a href="{{ route('seasons.edit',$season)}}" class="btn btn-primary">Editer</a></td>
                                 <td>
-                                    <form method="POST" action="{{ route('seasons.destroy', $season) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger">Supprimer</button>
-                                    </form>
+                                    {{--<form method="POST" action="{{ route('seasons.destroy', $season) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer?')">--}}
+                                        {{--@csrf--}}
+                                        {{--@method('DELETE')--}}
+                                        <button class="btn btn-danger" id ="openModal" >Supprimer</button>
+                                    {{--</form>--}}
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div id="modalDelete" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Supprimer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Etes-vous sûr de vouloir supprimer ?.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Confirmer</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
