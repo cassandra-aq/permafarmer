@@ -3,7 +3,6 @@
 require('./bootstrap');
 require('bootstrap');
 require('popper.js');
-require('./modal');
 
 require('select2');
 
