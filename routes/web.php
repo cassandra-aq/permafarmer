@@ -45,5 +45,9 @@ Route::get('/login', 'Auth\LoginController@open');
 Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
 Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');
 
+// STATIC
+Route::get('/le-principe', 'Web\StaticController@WhatWeDo');
+Route::get('/qui-sommes-nous', 'Web\StaticController@WhoAreWe');
+
 Route::get('/register', 'Auth\RegisterController@open');
 
