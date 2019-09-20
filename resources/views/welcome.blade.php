@@ -23,7 +23,7 @@
 <body>
 <header class="navbar navbar-expand-md bg-light navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/users') }}">
+        <a class="navbar-brand" href="/permafarmer/public">
             <i class="fab fa-pagelines" style="font-size: 400%">PermaFarmer</i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -52,7 +52,7 @@
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modalLogin"></i>
                 </li>
                 <li class="nav-item mx-2">
-                    <a href="{{route('my_products', ['user' => $user])}}"><i
+                    <a href="{{route('my_products', 1)}}"><i
                                 class="fas fa-shopping-cart"></i></a>
                 </li>
             </ul>
