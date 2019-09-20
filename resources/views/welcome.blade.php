@@ -40,13 +40,13 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link">Nos produits</a>
+                    <a class="nav-link" href="home">Nos produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Le principe</a>
+                    <a class="nav-link" href="/le-principe">Le principe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Qui sommes-nous?</a>
+                    <a class="nav-link" href="/qui-sommes-nous">Qui sommes-nous?</a>
                 </li>
                 <li class="nav-item">
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modalLogin"></i>
