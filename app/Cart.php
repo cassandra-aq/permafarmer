@@ -11,9 +11,11 @@ class Cart extends Model
         'name'
     ];
 
-    public function itemProduct()
+    public function products()
     {
-        return $this->hasMany('App\ItemProduct');
+        return $this
+            ->belongsToMany('App\Product','item_products','cart_id', 'product_id')
+            ->withPivot('quantity');
     }
 
     public function users()

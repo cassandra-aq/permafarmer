@@ -46,7 +46,8 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
 
-        $userType = UserType::findOrFail($request->get('userType'));
+        //$userType = UserType::findOrFail($request->get('userType'));
+        $userType = 1;
 
         $request = $request->merge([
             'password' => Hash::make($request->get('password')),

@@ -51,7 +51,7 @@
                 </table>
             </div>
         </div>
-        <div id="modalDelete" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel">
+        <div id="modalDelete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
