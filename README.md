@@ -1,7 +1,12 @@
 ## Build locally
 - clone repo
+- create a database named "permafarmer"
 - create .env file (rename '.env.example' file to '.env')
 - change APP_URL variable in .env doc and add your own localhost url (http://localhost/permafarmer/public if your repo name is permafarmer)
-- clear cache : sudo php artisan config:cache
-- run wepack : npm run watch
+- change .env DB variables with your own database details
+- clear cache : `php artisan config:cache`
+- run migrations : `php artisan migrate:fresh`
+- and `composer dump-autoload`
+- then launch seeds to fill your database : `php artisan db:seed`
+- run wepack : `npm run watch`
 - go to your localhost repo url (http://localhost/permafarmer/public if your repo name is permafarmer)
