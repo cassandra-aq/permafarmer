@@ -5,13 +5,4 @@ $('#modalLogin').on('show.bs.modal', function () {
     });
 });
 
-$('#register').on('click',function() {
-    $('#modalRegister').modal('show');
-});
-
-// $('#modalRegister').on('show.bs.modal', function () {
-//     $.get( "/permafarmer/public/register", function( data ) {
-//         $( "#register-container" ).html( data );
-//     });
-// });
 
