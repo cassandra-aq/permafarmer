@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'iban' => randomBarcode(10),
             'bic' => randomBarcode(4),
             'user_type_id' => rand(1,2),
-            'password' => bcrypt('password')
+            'password' => Hash::make('password')
         ]);
         User::create([
             'lastname' => "DOE",
@@ -30,17 +30,17 @@ class UsersTableSeeder extends Seeder
             'iban' => randomBarcode(10),
             'bic' => randomBarcode(4),
             'user_type_id' => rand(1,2),
-            'password' => bcrypt('password')
+            'password' => Hash::make('password')
         ]);
         User::create([
             'lastname' => "MANBU",
             'firstname' => "Gérard",
-            'email' => "gérard.manbu@fake.com",
+            'email' => "gerard.manbu@fake.com",
             'barcode' => randomBarcode(8),
             'iban' => randomBarcode(10),
             'bic' => randomBarcode(4),
             'user_type_id' => rand(1,2),
-            'password' => bcrypt('password')
+            'password' => Hash::make('password')
         ]);
         User::create([
             'lastname' => "Big",
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'iban' => randomBarcode(10),
             'bic' => randomBarcode(4),
             'user_type_id' => 3,
-            'password' => bcrypt('password')
+            'password' => Hash::make('password')
         ]);
     }
 }
