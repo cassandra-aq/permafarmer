@@ -12,10 +12,12 @@
         <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
     </nav>
 
-    <h2 class="subtitle">Mes abonnements</h2>
+    <div class="col-12">
+        <h2>Mes abonnements</h2>
+    </div>
     @foreach($user->subscriptions as $subscription)
-        <div class="card card-row uper m-5">
-            <div class="card-body row">
+        <div class="card row card-row uper col-12 col-sm-6 col-md-4 col-lg-3 m-5">
+            <div class="card-body">
                 <div class="col-2"><img src="{{ asset('img/groceries.png') }}"/></div>
                 <div class="col d-flex flex-column">
                     <div>@if($subscription->weight == 2.5)

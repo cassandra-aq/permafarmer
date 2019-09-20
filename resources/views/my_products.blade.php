@@ -6,72 +6,85 @@
             margin-top: 40px;
         }
     </style>
-    <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end">
+    <nav class="navbar navbar-light menu-green bg-light d-flex flex-row justify-content-end">
         <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
         <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
         <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
     </nav>
-    <h2 class="subtitle">Mes abonnements</h2>
-    @foreach($cart->products as $product)
-        <div class="card card-row uper m-5">
-            <div class="card-body row">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" {{url($product->filename? 'images/product/'.$product->filename:'images/No_image.png')}} alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$product->name}}</h5><div class="input-group">
+    <div class="row d-flex flex-row">
+        <div class="col-12">
+            <h2 class="subtitle">Récapitulatif panier</h2>
+        </div>
+        <div class="row">
+            @foreach($cart->products as $product)
+                <div class="card card-row uper m-5">
+                    <div class="card-body row">
+                        <img class="card-img-top"
+                             {{url($product->filename? 'images/product/'.$product->filename:'images/No_image.png')}} alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$product->name}}</h5>
+                            <h6>{{$product->quantity($user) * 0.5}} kg </h6>
+                            {{--                            <div class="input-group">--}}
+                            {{--                                <div class="input-group-prepend">--}}
+                            {{--                                    <button class="btn btn-outline-secondary" type="button" id="less_bag">-</button>--}}
+                            {{--                                </div>--}}
+                            {{--                                <input type="text" readonly class="form-control" id="input_quantity_bag"--}}
+                            {{--                                       value="{{$product->quantity($user)}}"/>--}}
+                            {{--                                <div class="input-group-append">--}}
+                            {{--                                    <button class="btn btn-outline-secondary" type="button" id="more_bag">+</button>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="col-12">
+            <h2 class="subtitle">Extras</h2>
+        </div>
+        <div class="col-11 card uper m-5 d-flex flex_columns">
+            <div class="card-body align-content-center">
+                <div class="row d-flex flex-row flex-wrap">
+                    <div class="col-2 align-self-center"><img src="{{ asset('img/shopping-bag.png') }}"/></div>
+                    <div class="col-6 align-self-center">
+                        <div>Tote bag Perma-Farmer
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button" id="less_bag">-</button>
                             </div>
-                            <input type="text" readonly class="form-control" id="input_quantity_bag" value="{{$product->quantity}}"/>
+                            <input type="text" readonly class="form-control" id="input_quantity_bag" value="0"/>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" id="more_bag">+</button>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    @endforeach
-
-    <h2 class="subtitle">Extras</h2>
-    <div class="card uper m-5 d-flex flex_columns">
-        <div class="card-body align-content-center">
-            <div class="row d-flex flex-row flex-wrap">
-                <div class="col-2 align-self-center"><img src="{{ asset('img/shopping-bag.png') }}"/></div>
-                <div class="col-6 align-self-center">
-                    <div>Tote bag Perma-Farmer
-                    </div>
-                </div>
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" id="less_bag">-</button>
-                        </div>
-                        <input type="text" readonly class="form-control" id="input_quantity_bag" value="0"/>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="more_bag">+</button>
-                        </div>
                     </div>
 
-                </div>
-
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <input type="text" readonly class="form-control" id="total_price_bag" value="0"/>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">€</span>
+                    <div class="col-2 align-self-center">
+                        <div class="input-group">
+                            <input type="text" readonly class="form-control" id="total_price_bag" value="0"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">€</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-3 offset-md-9" id="totalSubscription"
-             data-totalCart="{{$totalCart }}">Total ce mois-ci : {{$totalCart }} €
+        <div class="row justify-content-md-end">
+            <div class="" id="total_weight">Total : {{$total_weight}} kg</div>
+            <button class="btn btn-danger"
+                    @if($total_weight >= $user->subscriptions()->first()->weight) disabled @endif>Compléter
+                aléatoirement
+            </button>
+            <button class="btn btn-danger green-btn" type="submit">Valider</button>
         </div>
+
     </div>
 
 @endsection
