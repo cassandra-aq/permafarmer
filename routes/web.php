@@ -13,8 +13,12 @@
 
 // WEB
 Route::get('/', 'WebController@index');
-//Route::get('/my_account', 'AccountController@showMyAccount')->middleware('auth');
+//Route::get('/my_account', 'Web\AccountController@showMyAccount')->middleware('auth');
+//Route::get('/my_products', 'Web\MyProductsController@showMyProducts')->middleware('auth');
+//Route::get('/my_subscriptions', 'Web\MySubscriptionsController@showMySubscriptions')->middleware('auth');
 Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount');
+Route::get('/my_products/{user}', 'Web\MyProductsController@showMyProducts');
+Route::get('/my_subscriptions/{user}', 'Web\MySubscriptionsController@showMySubscriptions');
 
 // CARTS
 Route::resource('carts', 'Crud\CartController');
