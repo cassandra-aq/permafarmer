@@ -13,8 +13,9 @@ $(document).ready(function () {
 });
 
 
-$('.btn-add-product, .btn-remove-product').on('click', function() {
+$('.btn-add-product, .btn-remove-product').on('click', function(e) {
     const apiUrl = $(this).attr('data-api-url');
+    e.preventDefault();
 
     $.get( apiUrl, (function( self, data ) {
         return function(data) {
@@ -24,4 +25,8 @@ $('.btn-add-product, .btn-remove-product').on('click', function() {
     })(this)).fail( function(data) {
         console.error(data);
     });
+});
+
+$(document).ready(function() {
+
 });
