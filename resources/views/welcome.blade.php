@@ -23,7 +23,7 @@
 <body>
 <header class="navbar navbar-expand-md bg-light navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/users') }}">
+        <a class="navbar-brand" href="/permafarmer/public">
             <i class="fab fa-pagelines" style="font-size: 400%">PermaFarmer</i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -40,13 +40,13 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto d-flex flex-row justify-content-end align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link">Nos produits</a>
+                    <a class="nav-link" href="/permafarmer/public">Nos produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Le principe</a>
+                    <a class="nav-link" href="/permafarmer/public/le-principe">Le principe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Qui sommes-nous?</a>
+                    <a class="nav-link" href="/permafarmer/public/qui-sommes-nous">Qui sommes-nous?</a>
                 </li>
                 <li class="nav-item mx-2">
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modalLogin"></i>
