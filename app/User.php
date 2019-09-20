@@ -52,7 +52,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Subscription');
     }
 
-    public function  carts() {
+    public function carts()
+    {
         return $this->hasMany('App\Cart');
     }
 }

@@ -5,6 +5,8 @@
 
   .card-title {
     font-size: 1.5rem;
+    font-weight: bold;
+    color: #555;
   }
 
   .card-body {
@@ -27,7 +29,7 @@
 
   .nb-products {
     background-color: $yellow;
-    left: calc(50% - 20px)
+    left: calc(50% - 20px);
   }
 
   .btn-add-product, .btn-remove-product {

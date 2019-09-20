@@ -22,10 +22,6 @@ class Product extends Model {
         'image_name'
     ];
 
-    public function itemProduct()
-    {
-        return $this->belongsTo('App\ItemProduct');
-    }
 
     public function seasons()
     {
