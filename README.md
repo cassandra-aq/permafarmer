@@ -4,9 +4,10 @@
 - create .env file (rename '.env.example' file to '.env')
 - change APP_URL variable in .env doc and add your own localhost url (http://localhost/permafarmer/public if your repo name is permafarmer)
 - change .env DB variables with your own database details
+- run `composer install` and `npm install`
 - clear cache : `php artisan config:cache`
 - run migrations : `php artisan migrate:fresh`
 - and `composer dump-autoload`
 - then launch seeds to fill your database : `php artisan db:seed`
-- run wepack : `npm run watch`
+- run webpack : `npm run watch`
 - go to your localhost repo url (http://localhost/permafarmer/public if your repo name is permafarmer)
