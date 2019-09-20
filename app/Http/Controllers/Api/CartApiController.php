@@ -15,10 +15,10 @@ class CartApiController
         $product_nb = DB::transaction(function () use ($product) {
             $user = User::findOrFail(1); // TODO : remplacer par le user connecté
 
-            $userCart = $user->carts()->firstOrFail();
+            $userCart = $user->carts()->first();
             if (!$userCart) {
-                $userCart = new Cart();
-                $userCart->user_id()->associate($user);
+                $userCart = new Cart(['state' => 'en cours de préparation']);
+                $userCart->user()->associate($user);
             }
 
             $userCart->save();
@@ -44,23 +44,25 @@ class CartApiController
         $product_nb = DB::transaction(function () use ($product) {
             $user = User::findOrFail(1); // TODO : remplacer par le user connecté
 
-            $userCart = $user->carts()->firstOrFail();
+            $userCart = $user->carts()->first();
             if (!$userCart) {
-                $userCart = new Cart();
-                $userCart->user_id()->associate($user);
+                $userCart = new Cart(['state' => 'en cours de préparation']);
+                $userCart->user()->associate($user);
             }
 
             $userCart->save();
 
-
+            $productQuantity = 0;
             $products = $userCart->products()->where('products.id', $product->id);
-            if ($products->count() > 1) {
+            if ($products->count() > 0) {
                 $productQuantity = $products->firstOrFail()->pivot->quantity;
-                $productQuantity -= 1;
-                $userCart->products()->updateExistingPivot($product, ['quantity' => $productQuantity]);
-            } else {
-                $userCart->products()->attach($product);
-                $productQuantity = 1;
+                if ($productQuantity > 1) {
+                    $productQuantity -= 1;
+                    $userCart->products()->updateExistingPivot($product, ['quantity' => $productQuantity]);
+                } else if ($productQuantity == 1) {
+                    $userCart->products()->detach($product);
+                    $productQuantity = 0;
+                }
             }
 
             return $productQuantity;

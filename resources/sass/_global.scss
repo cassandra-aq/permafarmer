@@ -6,17 +6,16 @@ body {
 
 h2 {
   color: #333;
-  position : relative;
 
   &:after {
     content: '';
     background-color: $light-green;
     position: absolute;
-    width: 100%;
+    width: 100vw;
     height: 25px;
-    left: 0;
-    bottom: 7px;
+    bottom: -5px;
     z-index: -1;
+    left: -40%
   }
 }
 
