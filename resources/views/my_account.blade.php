@@ -1,17 +1,12 @@
 @extends('welcome')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
     <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end mt-0">
         <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
         <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
         <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
     </nav>
-    <h2 class="subtitle">Mon compte</h2>
+    <h2>Mon compte</h2>
     <div class="d-flex flex-row justify-content-around">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 card uper">
             <div class="card-body">

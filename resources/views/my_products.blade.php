@@ -1,11 +1,6 @@
 @extends('welcome')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
     <nav class="navbar navbar-light menu-green bg-light d-flex flex-row justify-content-end">
         <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
         <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
@@ -13,7 +8,7 @@
     </nav>
     <div class="row d-flex flex-row">
         <div class="col-12">
-            <h2 class="subtitle">Récapitulatif panier</h2>
+            <h2>Récapitulatif panier</h2>
         </div>
         <div class="row">
             @foreach($cart->products as $product)
@@ -41,7 +36,7 @@
         </div>
 
         <div class="col-12">
-            <h2 class="subtitle">Extras</h2>
+            <h2>Extras</h2>
         </div>
         <div class="col-11 card uper m-5 d-flex flex_columns">
             <div class="card-body align-content-center">

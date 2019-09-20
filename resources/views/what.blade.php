@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="subtitle">Le principe</h2>
+                <h2>Le principe</h2>
             </div>
         </div>
         <div class="row py-4">
