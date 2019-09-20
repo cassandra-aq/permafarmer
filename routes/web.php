@@ -55,9 +55,7 @@ Route::get('/login', 'Auth\LoginController@open')->name('showLogin');
 Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
 Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');
 Route::post('/login', 'Auth\LoginController@authentificate')->name('postLogin');
-//Route::post('/login', function () {
-//    dd("toto");
-//})->name('postLogin');;
+
 
 // STATIC
 Route::get('/le-principe', 'Web\StaticController@WhatWeDo');

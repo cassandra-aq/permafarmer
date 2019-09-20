@@ -65,7 +65,10 @@ class LoginController extends Controller
             };
             return '';
         });
-        return redirect()->route($route);
-
+        if (strlen($route) > 0) {
+            return redirect()->route($route);
+        }else {
+            echo('IN PROGRESS');
+        }
     }
 }
