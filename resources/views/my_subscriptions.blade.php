@@ -6,6 +6,12 @@
             margin-top: 40px;
         }
     </style>
+    <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end">
+        <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
+        <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
+        <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
+    </nav>
+
     <h2 class="subtitle">Mes abonnements</h2>
     @foreach($user->subscriptions as $subscription)
         <div class="card card-row uper m-5">
@@ -19,8 +25,7 @@
                         @endif
                     </div>
                     <div><i class="fa fa-clock mr-2"></i>Crée le {{date("d-m-y", strtotime($subscription->created_at))}}
-                        - Fin
-                        le {{date("d-m-y", strtotime($subscription->end_at))}}</div>
+                        - Fin le {{date("d-m-y", strtotime($subscription->end_at))}}</div>
                 </div>
                 <div class="col-2 d-flex flex-column">
                     <div>@if($subscription->weight == 2.5)
@@ -38,74 +43,33 @@
         <div class="col-md-3 offset-md-9">Total de mes abonnements : {{$totalSubscriptionPrice}} €</div>
     </div>
 
-
-    <h2 class="subtitle">Extras</h2>
-    <div class="card uper m-5 d-flex flex_columns">
-        <div class="card-body align-content-center">
-            <div class="row d-flex flex-row flex-wrap">
-                <div class="col-2 align-self-center"><img src="{{ asset('img/shopping-bag.png') }}"/></div>
-                <div class="col-6 align-self-center">
-                    <div>Tote bag Perma-Farmer
-                    </div>
+    <div class="card uper m-5 justify-content-between">
+        <div class="card-header">Souscrire un nouvel abonnement</div>
+        <div class="card-body d-flex flex-row">
+            <div class="col d-flex flex-column big_basket align-self-center m-5 p-5">
+                <div>
+                    <div>Grande formule</div>
+                    <div>7 kg - 111,60€/mois</div>
                 </div>
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" id="less_bag">-</button>
-                        </div>
-                        <input type="text" readonly class="form-control" id="input_quantity_bag" value="0"/>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="more_bag">+</button>
-                        </div>
-                    </div>
-
+                <div>
+                    <button class="add_button" id="add_big_basket">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
-
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <input type="text" readonly class="form-control" id="total_price_bag" value="0"/>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">€</span>
-                        </div>
-                    </div>
+            </div>
+            <div class="col d-flex flex-column small_basket align-self-center m-5 p-5">
+                <div>
+                    <div>Petite formule</div>
+                    <div>2.5 kg - 48,40€/mois</div>
+                </div>
+                <div>
+                    <button class="add_button" id="add_small_basket">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-3 offset-md-9" id="totalSubscription"
-             data-totalSubscription="{{$totalSubscriptionPrice }}">Total ce mois-ci : {{$totalSubscriptionPrice }} €
-        </div>
-    </div>
-
-{{--    <div class="card uper m-5 justify-content-between">--}}
-{{--        <div class="card-header">Souscrire un nouvel abonnement</div>--}}
-{{--        <div class="card-body d-flex flex-row">--}}
-{{--            <div class="col d-flex flex-column big_basket align-self-center m-5 p-5">--}}
-{{--                <div>--}}
-{{--                    <div>Grande formule</div>--}}
-{{--                    <div>7 kg - 111,60€/mois</div>--}}
-{{--                </div>--}}
-{{--                <div>--}}
-{{--                    <button class="add_button">--}}
-{{--                        <i class="fa fa-plus my-float"></i>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col d-flex flex-column small_basket align-self-center m-5 p-5">--}}
-{{--                <div>--}}
-{{--                    <div>Petite formule</div>--}}
-{{--                    <div>2.5 kg - 48,40€/mois</div>--}}
-{{--                </div>--}}
-{{--                <div>--}}
-{{--                    <button href="#" class="add_button">--}}
-{{--                        <i class="fa fa-plus my-float"></i>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 @endsection
 
@@ -141,6 +105,7 @@
 
                 div_totalSubscription.html('Total ce mois-ci : ' + total + ' €');
             });
+
         });
     </script>
 @endpush

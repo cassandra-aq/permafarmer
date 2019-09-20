@@ -19,3 +19,10 @@ h2 {
     z-index: -1;
   }
 }
+
+a {
+  color: $light-green;
+  &:hover {
+    color: $dark-green;
+  }
+}

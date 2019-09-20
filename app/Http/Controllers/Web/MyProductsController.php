@@ -12,6 +12,6 @@ class MyProductsController extends Controller
         $user = User::findOrFail(1);
         $cart = $user->carts()->where('created_at', date('d-m-Y'));
 
-        return view('my_products', compact('cart'));
+        return view('my_products', compact('cart', 'user'));
     }
 }

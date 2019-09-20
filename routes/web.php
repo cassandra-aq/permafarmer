@@ -16,9 +16,9 @@ Route::get('/', 'WebController@index');
 //Route::get('/my_account', 'Web\AccountController@showMyAccount')->middleware('auth');
 //Route::get('/my_products', 'Web\MyProductsController@showMyProducts')->middleware('auth');
 //Route::get('/my_subscriptions', 'Web\MySubscriptionsController@showMySubscriptions')->middleware('auth');
-Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount');
-Route::get('/my_products/{user}', 'Web\MyProductsController@showMyProducts');
-Route::get('/my_subscriptions/{user}', 'Web\MySubscriptionsController@showMySubscriptions');
+Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount')->name('my_account');
+Route::get('/my_products/{user}', 'Web\MyProductsController@showMyProducts')->name('my_products');
+Route::get('/my_subscriptions/{user}', 'Web\MySubscriptionsController@showMySubscriptions')->name('my_subscriptions');
 
 // CARTS
 Route::resource('carts', 'Crud\CartController');
@@ -50,4 +50,6 @@ Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
 Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');
 
 Route::get('/register', 'Auth\RegisterController@open');
+
+Route::post('/my_account/{user}/reset_password', 'Auth\ResetPasswordController@resetPassword')->name('reset_password');
 
