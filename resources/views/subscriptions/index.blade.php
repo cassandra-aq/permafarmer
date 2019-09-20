@@ -26,9 +26,9 @@
                             <td>{{ $subscription->createdAt }}</td>
                             <td>{{ $subscription->endAt}}</td>
                             @if($subscription->weight == 2.5)
-                                <td>Petit panier 2.5 kg - 00.00€/mois</td>
+                                <td>Petit panier 2.5 kg - 48,40€/mois</td>
                             @else
-                                <td>Grand panier 7 kg - 00.00€/mois</td>
+                                <td>Grand panier 7 kg - 111,60/mois</td>
                             @endif
                             <td>{{ $subscription->duration }} mois</td>
                             <td><a href="{{ route('subscriptions.edit', $subscription) }}" class="btn btn-primary">Editer</a>
