@@ -6,7 +6,7 @@
             margin-top: 40px;
         }
     </style>
-    <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end">
+    <nav class="navbar navbar-light navbar-green menu-yellow bg-light d-flex flex-row justify-content-end">
         <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
         <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
         <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
