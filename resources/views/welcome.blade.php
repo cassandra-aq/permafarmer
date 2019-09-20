@@ -38,7 +38,7 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto d-flex flex-row justify-content-end align-items-center">
                 <li class="nav-item">
                     <a class="nav-link" href="/permafarmer/public">Nos produits</a>
                 </li>
@@ -48,11 +48,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/permafarmer/public/qui-sommes-nous">Qui sommes-nous?</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <i class="fas fa-user-circle" data-toggle="modal" data-target="#modalLogin"></i>
                 </li>
-                <li class="nav-item">
-                    <i class="fas fa-shopping-cart"></i>
+                <li class="nav-item mx-2">
+                    <a href="{{route('my_products', ['user' => $user])}}"><i
+                                class="fas fa-shopping-cart"></i></a>
                 </li>
             </ul>
         </div>
@@ -66,11 +67,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Veuillez vous Authentifiez : </p>
+                        <p>Veuillez vous authentifier : </p>
                         <div class="container" id="login-container">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
                     </div>
                 </div>
             </div>

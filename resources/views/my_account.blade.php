@@ -6,103 +6,73 @@
             margin-top: 40px;
         }
     </style>
-    <h2 class="subtitle">Mes abonnements</h2>
-    @foreach($user->subscriptions as $subscription)
-        <div class="card card-row uper m-5">
-            <div class="card-body row">
-                <div class="col-2"><img src="{{ asset('img/groceries.png') }}"/></div>
-                <div class="col d-flex flex-column">
-                    <div>@if($subscription->weight == 2.5)
-                            Petite formule - Panier de 2,5 kg
-                        @elseif($subscription->weight == 7)
-                            Grande formule - Panier de 7 kg
-                        @endif
+    <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end mt-0">
+        <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
+        <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
+        <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
+    </nav>
+    <h2 class="subtitle">Mon compte</h2>
+    <div class="d-flex flex-row justify-content-around">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 card uper">
+            <div class="card-body">
+                <h3>Informations personnelles</h3>
+                <form method="post" action="{{ route('users.update', ['user' => $user]) }}">
+                    <div class="form-group">
+                        @csrf
+                        @method('PUT')
+                        <label for="lastname">Nom:</label>
+                        <input id="lastname" type="text" class="form-control" name="lastname"
+                               value="{{ $user->lastname }}"/>
+                        <label for="firstname">Prénom:</label>
+                        <input id="firstname" type="text" class="form-control" name="firstname"
+                               value="{{ $user->firstname }}"/>
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}"/>
                     </div>
-                    <div><i class="fa fa-clock mr-2"></i>Crée le {{date("d-m-y", strtotime($subscription->created_at))}}
-                        - Fin
-                        le {{date("d-m-y", strtotime($subscription->end_at))}}</div>
-                </div>
-                <div class="col-2 d-flex flex-column">
-                    <div>@if($subscription->weight == 2.5)
-                            48,40€/mois
-                        @elseif($subscription->weight == 7)
-                            111,60€/mois
-                        @endif
-                    </div>
-                    {{--                    <div><a><i class="far fa-calendar-times mx-2"></i>Annuler l'abonnement</a></div>--}}
-                </div>
+                    <button type="submit" class="btn btn-primary green_btn">Valider</button>
+                </form>
+
+
             </div>
         </div>
-    @endforeach
-    <div class="row">
-        <div class="col-md-3 offset-md-9">Total de mes abonnements : {{$totalSubscriptionPrice}} €</div>
-    </div>
-
-
-    <h2 class="subtitle">Extras</h2>
-    <div class="card uper m-5 d-flex flex_columns">
-        <div class="card-body align-content-center">
-            <div class="row d-flex flex-row flex-wrap">
-                <div class="col-2 align-self-center"><img src="{{ asset('img/shopping-bag.png') }}"/></div>
-                <div class="col-6 align-self-center">
-                    <div>Tote bag Perma-Farmer
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 card uper">
+            <div class="card-body">
+                <h3>Changer le mot de passe</h3>
+                <form method="post" action="{{ route('reset_password', ['user' => $user]) }}">
+                    <div class="form-group">
+                        @csrf
+                        @method('PUT')
+                        <label for="old_password">Ancien mot de passe :</label>
+                        <input id="old_password" type="password" class="form-control" name="old_password"/>
+                        <label for="new_password">Nouveau mot de passe :</label>
+                        <input id="new_password" type="password" class="form-control" name="new_password"/>
+                        <label for="new_password_again">Retapez votre mot de passe :</label>
+                        <input id="new_password_again" type="password" class="form-control"/>
                     </div>
-                </div>
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" id="less_bag">-</button>
-                        </div>
-                        <input type="text" readonly class="form-control" id="input_quantity_bag" value="0"/>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="more_bag">+</button>
-                        </div>
-                    </div>
+                    <button type="submit" id="submit_new_password" class="btn btn-primary green_btn">Valider</button>
+                </form>
 
-                </div>
 
-                <div class="col-2 align-self-center">
-                    <div class="input-group">
-                        <input type="text" readonly class="form-control" id="total_price_bag" value="0"/>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">€</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 card uper">
+            <div class="card-body">
+                <h3>Changer mes informations bancaires</h3>
+                <form method="post" action="{{ route('users.update', ['user' => $user]) }}">
+                    <div class="form-group">
+                        @csrf
+                        @method('PUT')
+                        <label for="lastname">IBAN:</label>
+                        <input id="lastname" type="text" class="form-control" name="lastname"
+                               value="{{ $user->iban }}"/>
+                        <label for="firstname">BIC:</label>
+                        <input id="firstname" type="text" class="form-control" name="firstname"
+                               value="{{ $user->bic }}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary green_btn">Valider</button>
+                </form>
 
-    <div class="row">
-        <div class="col-md-3 offset-md-9" id="totalSubscription"
-             data-totalSubscription="{{$totalSubscriptionPrice }}">Total ce mois-ci : {{$totalSubscriptionPrice }} €
-        </div>
-    </div>
 
-    <div class="card uper m-5 justify-content-between">
-        <div class="card-header">Souscrire un nouvel abonnement</div>
-        <div class="card-body d-flex flex-row">
-            <div class="col d-flex flex-column big_basket align-self-center m-5 p-5">
-                <div>
-                    <div>Grande formule</div>
-                    <div>7 kg - 111,60€/mois</div>
-                </div>
-                <div>
-                    <button class="add_button">
-                        <i class="fa fa-plus my-float"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col d-flex flex-column small_basket align-self-center m-5 p-5">
-                <div>
-                    <div>Petite formule</div>
-                    <div>2.5 kg - 48,40€/mois</div>
-                </div>
-                <div>
-                    <button href="#" class="add_button">
-                        <i class="fa fa-plus my-float"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -112,35 +82,16 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            var input_quantity = $('#input_quantity_bag');
-            var input_price = $('#total_price_bag');
+            var new_password = $('#new_password');
+            var new_password_again = $('#new_password_again');
 
-            $(document).on('click', '#more_bag', function () {
-                let quantity = parseInt(input_quantity.val());
-                quantity += 1;
-                input_quantity.val(quantity);
-                input_price.val(quantity);
-                input_price.trigger('change');
-            });
-
-            $(document).on('click', '#less_bag', function () {
-                let quantity = input_quantity.val();
-                if (quantity > 0) {
-                    quantity -= 1;
+            $(document).on('click', '#submit_new_password', function () {
+                if (new_password.val() !== new_password_again.val()) {
+                    alert("Les mots de passe ne sont pas identiques");
+                    e.preventDefault();
                 }
-                input_quantity.val(quantity);
-                input_price.val(quantity);
-                input_price.trigger('change');
-            });
-
-            input_price.change((event) => {
-                let div_totalSubscription = $('#totalSubscription');
-                let total_price_bags = parseInt(event.target.value);
-                let total_price_without_bags = parseInt(div_totalSubscription.attr('data-totalSubscription'));
-                let total = total_price_without_bags + total_price_bags;
-
-                div_totalSubscription.html('Total ce mois-ci : ' + total + ' €');
             });
         });
+
     </script>
 @endpush

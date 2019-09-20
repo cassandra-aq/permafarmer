@@ -23,7 +23,7 @@
             <label for="seasons">Saisons</label>
             <select class="select2-multiple" multiple name="seasons[]" class="form-control" id="seasons" style="width:100%">
                 @foreach($seasons as $season)
-                    <option value="{{ $season->id }}">{{ $season->name }}</option>
+                    <option value="{{ $season->id }}"  @foreach($seasons_selected as $season_selected) @if($season->id == $season_selected->id)selected="selected"@endif @endforeach>{{ $season->name }}</option>
                 @endforeach
             </select>
         </div>
