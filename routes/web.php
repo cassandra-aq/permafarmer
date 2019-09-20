@@ -51,5 +51,9 @@ Route::post('/login', 'Auth\LoginController@authentificate')->name('postLogin');
 //    dd("toto");
 //})->name('postLogin');;
 
+// STATIC
+Route::get('/le-principe', 'Web\StaticController@WhatWeDo');
+Route::get('/qui-sommes-nous', 'Web\StaticController@WhoAreWe');
+
 Route::get('/register', 'Auth\RegisterController@open');
 
