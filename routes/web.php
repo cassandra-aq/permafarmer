@@ -11,8 +11,7 @@
 |
 */
 
-// WEB
-Route::get('/', 'WebController@index');
+
 //Route::get('/my_account', 'AccountController@showMyAccount')->middleware('auth');
 Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount');
 
@@ -40,10 +39,17 @@ Route::resource('subscriptions', 'Crud\SubscriptionController');
 //HOME
 Route::get('/', 'Web\HomeController@index')->name('home');
 
+//ADMIN
+Route::get('/admin', 'Web\AdminController@index')->name('admin');
+
 //LOGIN
-Route::get('/login', 'Auth\LoginController@open');
+Route::get('/login', 'Auth\LoginController@open')->name('showLogin');
 Route::get('/api/add-cart/{product}', 'Api\CartApiController@addToCart');
 Route::get('/api/remove-cart/{product}', 'Api\CartApiController@removeFromCart');
+Route::post('/login', 'Auth\LoginController@authentificate')->name('postLogin');
+//Route::post('/login', function () {
+//    dd("toto");
+//})->name('postLogin');;
 
 Route::get('/register', 'Auth\RegisterController@open');
 
