@@ -18,3 +18,17 @@ h2 {
     left: -40%
   }
 }
+
+a {
+  color: $light-green;
+  &:hover {
+    color: $dark-green;
+  }
+}
+
+.menu-green {
+  background-color : $light-green !important;
+  color: #ffffff !important;
+  margin-top: -25px;
+}
+

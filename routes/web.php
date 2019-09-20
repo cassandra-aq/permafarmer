@@ -14,6 +14,14 @@
 
 //Route::get('/my_account', 'AccountController@showMyAccount')->middleware('auth');
 Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount');
+// WEB
+Route::get('/', 'WebController@index');
+//Route::get('/my_account', 'Web\AccountController@showMyAccount')->middleware('auth');
+//Route::get('/my_products', 'Web\MyProductsController@showMyProducts')->middleware('auth');
+//Route::get('/my_subscriptions', 'Web\MySubscriptionsController@showMySubscriptions')->middleware('auth');
+Route::get('/my_account/{user}', 'Web\AccountController@showMyAccount')->name('my_account');
+Route::get('/my_products/{user}', 'Web\MyProductsController@showMyProducts')->name('my_products');
+Route::get('/my_subscriptions/{user}', 'Web\MySubscriptionsController@showMySubscriptions')->name('my_subscriptions');
 
 // CARTS
 Route::resource('carts', 'Crud\CartController');
@@ -56,4 +64,6 @@ Route::get('/le-principe', 'Web\StaticController@WhatWeDo');
 Route::get('/qui-sommes-nous', 'Web\StaticController@WhoAreWe');
 
 Route::get('/register', 'Auth\RegisterController@open');
+
+Route::post('/my_account/{user}/reset_password', 'Auth\ResetPasswordController@resetPassword')->name('reset_password');
 
