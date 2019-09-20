@@ -49,21 +49,22 @@ class ProductController extends Controller
         if($req->hasFile('image_file')){
             $file =$req->file('image_file');
             $name=time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/products',$name);
+
+            $req->image_file->move(public_path('images/products'), $name);
 
             $req = $req->merge([
                 'image_name' => $name
             ]);
         }
 
-
         DB::transaction(function () use ($req) {
             $product = new Product();
-            $seasons = Season::findOrFail($req->get('season'));
+            $seasons = Season::find($req->get('season'));
             if ($seasons) {
                 foreach ($seasons as $season)
                     $product->seasons()->attach($season);
             };
+
             $product->fill($req->all())->saveOrFail();
         });
 
@@ -79,7 +80,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $seasons = Season::all();
-        return view('products.edit', compact(['product', 'seasons' => $seasons]));
+        $seasons_selected = $product->seasons()->get();
+        return view('products.edit', compact(['product', 'seasons', 'seasons_selected']));
     }
 
     /**
@@ -91,25 +93,29 @@ class ProductController extends Controller
      */
     public function update(Request $req, Product $product)
     {
+        if($req->hasFile('image_file')){
+            $file =$req->file('image_file');
+            $name=time().$file->getClientOriginalName();
+            $filename  = public_path('/images/products/').$name;
+            if(file_exists($filename))
+                File::delete($filename);
 
+            $file->move(public_path().'/images/products',$name);
+
+            $req = $req->merge([
+                'image_name' => $name
+            ]);
+        }
 
         DB::transaction(function () use ($req, $product) {
-            $seasons = Season::findOrFail($req->get('season'));
+            $seasons = Season::find($req->get('seasons'));
             if ($seasons) {
+                $product->seasons()->detach();
                 foreach ($seasons as $season)
-                    $product->seasons()->sync($season);
+                    $product->seasons()->attach($season);
             };
             $product->fill($req->all())->saveOrFail();
         });
-
-        if($req->hasFile('image_name')){
-            $file =$req->file('image_name');
-            $name=time().$file->getClientOriginalName();
-            $filename  = public_path('/images/products/').$name;
-            if(File::exists($filename))
-                File::delete($filename);
-            $file->move(public_path().'/images/products/', $name);
-        }
 
         return redirect()->route('products.index')->with('success', 'Le produit a bien été modifié.');
     }
