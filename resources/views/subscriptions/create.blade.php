@@ -18,8 +18,8 @@
                     @csrf
                     <label for="weight">Type de panier :</label>
                     <select id="weight" class="form-control" name="weight">
-                        <option value="2.5">Petit panier 2,5 kg - 00.00€/mois</option>
-                        <option value="7">Grand panier 7 kg - 00.00#/mois</option>
+                        <option value="2.5">Petit panier 2,5 kg - 48,40€/mois</option>
+                        <option value="7">Grand panier 7 kg - 111,60€/mois</option>
                     </select>
                     <label for="select_user">Sélectionnez un utilisateur existant dans la liste :</label>
                     <select id="select_user" class="form-control" name="user">

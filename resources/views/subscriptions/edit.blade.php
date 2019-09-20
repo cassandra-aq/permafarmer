@@ -26,10 +26,10 @@
                     <label for="weight">Type de panier :</label>
                     <select id="weight" class="form-control" name="weight">
                         <option @if($subscription->weight == 2.5) selected @endif value="2.5">
-                            Petit panier 2,5 kg - 00.00€/mois
+                            Petit panier 2,5 kg - 48,40€/mois
                         </option>
                         <option @if($subscription->weight != 2.5) selected @endif value="7">
-                            Grand panier 7 kg - 00.00€/mois
+                            Grand panier 7 kg - 111,60€/mois
                         </option>
                     </select>
                 </div>

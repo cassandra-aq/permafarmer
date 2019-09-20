@@ -2,6 +2,12 @@
 
 @section('content')
     <nav class="navbar navbar-light navbar-green bg-light d-flex flex-row justify-content-end">
+    <style>
+        .uper {
+            margin-top: 40px;
+        }
+    </style>
+    <nav class="navbar navbar-light navbar-green menu-yellow bg-light d-flex flex-row justify-content-end">
         <a class="navbar-brand" href="{{ route('my_subscriptions', ['user' => $user]) }}">Mes abonnements</a>
         <a class="navbar-brand" href="{{ route('my_products', ['user' => $user]) }}">Mon panier de la semaine</a>
         <a class="navbar-brand" href="{{ route('my_account', ['user' => $user]) }}">Mon compte</a>
@@ -29,14 +35,13 @@
                             <div><i class="fa fa-clock mr-2"></i>Crée le {{date("d-m-y", strtotime($subscription->created_at))}}
                                     - Fin le {{date("d-m-y", strtotime($subscription->end_at))}}</div>
                         </div>
-                        <span class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
                             <span class="h4">@if($subscription->weight == 2.5)
                                     48,40€/mois
                                 @elseif($subscription->weight == 7)
                                     111,60€/mois
                                 @endif
                             </span>
-                            {{--                    <div><a><i class="far fa-calendar-times mx-2"></i>Annuler l'abonnement</a></div>--}}
                         </div>
                     </div>
             @endforeach
